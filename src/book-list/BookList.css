@@ -1,0 +1,48 @@
+.book-list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e8fefa;
+}
+
+.book-list {
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #61a69a;
+  border-radius: 16px;
+  background-color: #91c7bda5;
+  overflow-y: scroll;
+  scrollbar-width: medium;
+  scrollbar-color: #61a69a #91c7bd7a;
+  height: calc(70vh - 16px);
+}
+
+.book-list::-webkit-scrollbar-thumb {
+  background-color: #61a69a;
+}
+
+.book-list::-webkit-scrollbar-thumb:hover {
+  background-color: #549a8f;
+}
+
+.book-list-title {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  font-weight: 500;
+  color: #333;
+  width: 100%;
+}
+
+.book-list-item {
+  padding: 16px;
+  margin: 8px 0;
+  border-bottom: 1px solid #61a69a;
+  transition: background-color 0.3s ease;
+}
+
+.book-icon {
+  color: #61a69a;
+  margin-right: 8px;
+}
