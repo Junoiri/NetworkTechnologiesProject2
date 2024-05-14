@@ -1,30 +1,37 @@
-import { Button, TextField } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import "./LoginForm.css";
-import { useCallback, useMemo } from "react";
-import { Formik } from "formik";
-import * as yup from "yup";
+import { Button, TextField } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import './LoginForm.css';
+import { useCallback, useMemo } from 'react';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const onSubmit = useCallback(
     (values: { username: string; password: string }, formik: any) => {
       console.log(values);
+      navigate('/home');
     },
-    [],
+    [navigate],
   );
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        username: yup.string().required("Required"),
-        password: yup.string().required("Required"),
+        username: yup.string().required('Required'),
+        password: yup
+          .string()
+          .required('Required')
+          .min(5, 'Password too short'),
       }),
     [],
   );
 
   return (
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ username: '', password: '' }}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
       validateOnChange
