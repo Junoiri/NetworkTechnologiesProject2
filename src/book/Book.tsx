@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
-import "./Book.css";
+import React from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
+import './Book.css';
 
 interface BookProps {
   title: string;

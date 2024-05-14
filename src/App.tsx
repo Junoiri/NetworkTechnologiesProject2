@@ -1,11 +1,15 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './home-page/HomePage';
 import LoginForm from './login-form/LoginForm';
+import BookList from './book-list/BookList';
+import LoanList from './loan-list/LoanList';
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/books" element={<BookList />} />
+      <Route path="/loans" element={<LoanList />} />
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/home/*" element={<HomePage />}>
         <Route
