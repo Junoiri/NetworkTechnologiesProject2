@@ -1,40 +1,49 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './home-page/HomePage';
 import LoginForm from './login-form/LoginForm';
 import BookList from './book-list/BookList';
 import LoanList from './loan-list/LoanList';
+import ApiProvider from './api/ApiProvider';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/books" element={<BookList />} />
-      <Route path="/loans" element={<LoanList />} />
-      <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/home/*" element={<HomePage />}>
-        <Route
-          path="1"
-          element={
-            <div
-              style={{ height: '300px', width: '100%', backgroundColor: 'red' }}
+    <BrowserRouter>
+      <ApiProvider>
+        <Routes>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/books" element={<BookList />} />
+          <Route path="/loans" element={<LoanList />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/home/*" element={<HomePage />}>
+            <Route
+              path="1"
+              element={
+                <div
+                  style={{
+                    height: '300px',
+                    width: '100%',
+                    backgroundColor: 'red',
+                  }}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="2"
-          element={
-            <div
-              style={{
-                height: '300px',
-                width: '100%',
-                backgroundColor: 'blue',
-              }}
+            <Route
+              path="2"
+              element={
+                <div
+                  style={{
+                    height: '300px',
+                    width: '100%',
+                    backgroundColor: 'blue',
+                  }}
+                />
+              }
             />
-          }
-        />
-      </Route>
-      <Route path="*" element={<h1>404</h1>} />
-    </Routes>
+          </Route>
+          <Route path="*" element={<h1>404</h1>} />
+        </Routes>
+      </ApiProvider>
+    </BrowserRouter>
   );
 }
 
