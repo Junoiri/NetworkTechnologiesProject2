@@ -1,14 +1,15 @@
 export type BookDto = {
-  title: string;
-  author: string;
-  isbn: string;
-  publicationDate: Date;
+  title: string | undefined;
+  author: string | undefined;
+  isbn: string | undefined;
 };
 
 export type BookResponseDto = {
-  id: number;
-  title: string;
-  author: string;
-  isbn: string;
-  publicationDate: Date;
+  bookId: number | undefined;
+  isbn: string | undefined;
+  title: string | undefined;
+  author: string | undefined;
+  publisher: string | undefined;
+  year: number | undefined;
+  availableCopies: number | undefined;
 };

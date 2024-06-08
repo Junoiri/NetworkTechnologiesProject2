@@ -1,15 +1,10 @@
-import React from "react";
-import { Tooltip, Typography, Fade } from "@mui/material";
-import "./BookDetailsTooltip.css";
+import React from 'react';
+import { Tooltip, Typography, Fade } from '@mui/material';
+import './BookDetailsTooltip.css';
+import { BookResponseDto } from '../api/dto/book.dto';
 
 interface BookDetailsProps {
-  book: {
-    BookID: string;
-    ISBN: string;
-    Publisher: string;
-    YearPublished: number;
-    AvailableCopies: number;
-  };
+  book: BookResponseDto;
   children: React.ReactElement<any, any>;
 }
 
@@ -18,11 +13,12 @@ const BookDetailsTooltip: React.FC<BookDetailsProps> = ({ book, children }) => {
     <Tooltip
       title={
         <>
-          <Typography color="inherit">{`BookID: ${book.BookID}`}</Typography>
-          <Typography color="inherit">{`ISBN: ${book.ISBN}`}</Typography>
-          <Typography color="inherit">{`Publisher: ${book.Publisher}`}</Typography>
-          <Typography color="inherit">{`Year Published: ${book.YearPublished}`}</Typography>
-          <Typography color="inherit">{`Available Copies: ${book.AvailableCopies}`}</Typography>
+          <Typography color="inherit">{`Title: ${book.title}`}</Typography>
+          <Typography color="inherit">{`Author: ${book.author}`}</Typography>
+          <Typography color="inherit">{`ISBN: ${book.isbn}`}</Typography>
+          <Typography color="inherit">{`Publisher: ${book.publisher}`}</Typography>
+          <Typography color="inherit">{`Year Published: ${book.year}`}</Typography>
+          <Typography color="inherit">{`Available Copies: ${book.availableCopies}`}</Typography>
         </>
       }
       TransitionComponent={Fade}

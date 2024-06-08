@@ -54,8 +54,14 @@ export class LibraryClient {
       }
       console.log('Token used in getAllBooks:', token);
 
-      const response: AxiosResponse<any> =
-        await this.client.get('/book/getAll');
+      const response: AxiosResponse<any> = await this.client.get(
+        '/book/getAll',
+        {
+          headers: {
+            Authorization: token, // Use the token directly without adding the `Bearer ` prefix
+          },
+        },
+      );
       return {
         success: true,
         data: response.data,

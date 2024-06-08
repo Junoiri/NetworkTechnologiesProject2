@@ -1,21 +1,28 @@
 import { Button, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import './LoginForm.css';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../api/ApiProvider';
 
-function LoginForm() {
+type LoginFormProps = {
+  onLogin: () => void;
+};
+
+function LoginForm({ onLogin }: LoginFormProps) {
   const navigate = useNavigate();
   const apiClient = useApi();
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const onSubmit = useCallback(
     async (values: { username: string; password: string }, formik: any) => {
+      setIsLoggingIn(true);
       try {
         const response = await apiClient.login(values);
         if (response.success) {
+          onLogin(); // Call the onLogin callback when login is successful
           navigate('/home');
         } else {
           // If the login was not successful, show an error message
@@ -27,9 +34,11 @@ function LoginForm() {
           'username',
           'An error occurred. Please try again.',
         );
+      } finally {
+        setIsLoggingIn(false);
       }
     },
-    [navigate, apiClient],
+    [navigate, apiClient, onLogin],
   );
 
   const validationSchema = useMemo(
@@ -43,6 +52,9 @@ function LoginForm() {
       }),
     [],
   );
+  if (isLoggingIn) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Formik
