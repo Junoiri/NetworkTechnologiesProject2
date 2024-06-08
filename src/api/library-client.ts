@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { LoginDto } from './dto/login.dto';
+import { LoanDto } from './dto/loan.dto';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -58,7 +59,7 @@ export class LibraryClient {
         '/book/getAll',
         {
           headers: {
-            Authorization: token, // Use the token directly without adding the `Bearer ` prefix
+            Authorization: token,
           },
         },
       );
@@ -70,6 +71,40 @@ export class LibraryClient {
     } catch (error) {
       const axiosError = error as AxiosError<Error>;
       console.error('getAllBooks error:', axiosError.message);
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+  public async getAllLoans(): Promise<ClientResponse<LoanDto[] | null>> {
+    try {
+      const token = this.client.defaults.headers.common['Authorization'];
+      if (!token) {
+        console.error(
+          'Token missing: No Authorization token found for getAllLoans request',
+        );
+        throw new Error('Authorization token is required for this operation');
+      }
+      console.log('Token used in getAllLoans:', token);
+
+      const response: AxiosResponse<LoanDto[]> = await this.client.get(
+        '/loan/getAll',
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      console.error('getAllLoans error:', axiosError.message);
       return {
         success: false,
         data: null,

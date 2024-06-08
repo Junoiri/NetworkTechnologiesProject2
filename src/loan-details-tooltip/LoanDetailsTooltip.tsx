@@ -1,8 +1,10 @@
+import React from 'react';
 import { Tooltip, Typography, Fade } from '@mui/material';
-import { LoanType } from '../data/mockLoans';
+import './LoanDetailsTooltip.css';
+import { LoanDto } from '../api/dto/loan.dto';
 
 interface LoanDetailsProps {
-  loan: LoanType;
+  loan: LoanDto;
   children: React.ReactElement<any, any>;
 }
 
@@ -11,12 +13,12 @@ const LoanDetailsTooltip: React.FC<LoanDetailsProps> = ({ loan, children }) => {
     <Tooltip
       title={
         <>
-          <Typography color="inherit">{`LoanID: ${loan.LoanID}`}</Typography>
-          <Typography color="inherit">{`BookID: ${loan.BookID}`}</Typography>
-          <Typography color="inherit">{`UserID: ${loan.UserID}`}</Typography>
-          <Typography color="inherit">{`LoanDate: ${loan.LoanDate}`}</Typography>
-          <Typography color="inherit">{`DueDate: ${loan.DueDate}`}</Typography>
-          <Typography color="inherit">{`ReturnDate: ${loan.ReturnDate || 'Not yet returned'}`}</Typography>
+          <Typography color="inherit">{`LoanID: ${loan.loanId}`}</Typography>
+          <Typography color="inherit">{`BookID: ${loan.bookId}`}</Typography>
+          <Typography color="inherit">{`UserID: ${loan.userId}`}</Typography>
+          <Typography color="inherit">{`LoanDate: ${loan.loanDate}`}</Typography>
+          <Typography color="inherit">{`DueDate: ${loan.dueDate}`}</Typography>
+          <Typography color="inherit">{`ReturnDate: ${loan.returnDate || 'Not yet returned'}`}</Typography>
         </>
       }
       TransitionComponent={Fade}
