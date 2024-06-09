@@ -12,13 +12,15 @@ import BookIcon from '@mui/icons-material/Book';
 import './BookList.css';
 import BookDetailsTooltip from '../book-details-tooltip/BookDetailsTooltip';
 import MenuAppBar from '../menu-app-bar/MenuAppBar';
-import { LibraryClient } from '../api/library-client';
 import { BookResponseDto } from '../api/dto/book.dto';
 import { useApi } from '../api/ApiProvider';
+import addIcon from '../assets/ic-add.png';
+import { useNavigate } from 'react-router-dom';
 
 function BookList() {
   const [books, setBooks] = useState<BookResponseDto[]>([]);
   const apiClient = useApi();
+  const navigate = useNavigate();
 
   const fetchBooks = async () => {
     try {
@@ -40,6 +42,12 @@ function BookList() {
       </Grid>
       <Grid item>
         <Box className="book-list-container">
+          <button
+            className="add-book-button"
+            onClick={() => navigate('/bookform')}
+          >
+            <img src={addIcon} alt="Add book" />
+          </button>
           <List dense className="book-list">
             <Typography variant="h5" component="h1" className="book-list-title">
               Book List

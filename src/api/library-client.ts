@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { LoginDto } from './dto/login.dto';
 import { LoanDto } from './dto/loan.dto';
+import { BookDto } from './dto/book.dto';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -12,7 +13,6 @@ export class LibraryClient {
   private client: AxiosInstance;
 
   constructor() {
-    console.log('LibraryClient initialized');
     this.client = axios.create({
       baseURL: 'http://localhost:8081',
     });
@@ -105,6 +105,47 @@ export class LibraryClient {
     } catch (error) {
       const axiosError = error as AxiosError<Error>;
       console.error('getAllLoans error:', axiosError.message);
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+  public async addBook(book: {
+    bookId?: number;
+    isbn?: string;
+    title?: string;
+    author?: string;
+    publisher?: string;
+    year?: number;
+    availableCopies?: number;
+  }) {
+    const token = this.client.defaults.headers.common['Authorization'];
+    console.log('Token:', token);
+
+    if (!token) {
+      throw new Error('Authorization token is missing. Please login first.');
+    }
+
+    try {
+      const response: AxiosResponse<BookDto> = await this.client.post(
+        '/book/add',
+        book,
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      console.error('addBook error:', axiosError.message);
       return {
         success: false,
         data: null,

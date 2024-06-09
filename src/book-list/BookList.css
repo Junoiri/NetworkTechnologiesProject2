@@ -52,3 +52,18 @@ body {
   color: #61a69a;
   margin-right: 8px;
 }
+.add-book-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: transparent;
+  border: none;
+  width: 70px;
+  height: 70px;
+}
+
+.add-book-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

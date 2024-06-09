@@ -5,6 +5,7 @@ import BookList from './book-list/BookList';
 import LoanList from './loan-list/LoanList';
 import ApiProvider from './api/ApiProvider';
 import { useState } from 'react';
+import BookForm from './book-form/BookForm';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,6 +18,7 @@ function App() {
             element={<LoginForm onLogin={() => setIsLoggedIn(true)} />}
           />
           <Route path="/books" element={<BookList />} />
+          <Route path="/bookform" element={<BookForm />} />
           <Route path="/loans" element={<LoanList />} />
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/home/*" element={<HomePage />}>
