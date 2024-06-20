@@ -16,11 +16,13 @@ import { BookResponseDto } from '../api/dto/book.dto';
 import { useApi } from '../api/ApiProvider';
 import addIcon from '../assets/ic-add.png';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function BookList() {
   const [books, setBooks] = useState<BookResponseDto[]>([]);
   const apiClient = useApi();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const fetchBooks = async () => {
     try {
@@ -46,11 +48,11 @@ function BookList() {
             className="add-book-button"
             onClick={() => navigate('/bookform')}
           >
-            <img src={addIcon} alt="Add book" />
+            <img src={addIcon} alt={t('Add book')} />
           </button>
           <List dense className="book-list">
             <Typography variant="h5" component="h1" className="book-list-title">
-              Book List
+              {t('Book List')}
             </Typography>
             {books.map((book) => (
               <BookDetailsTooltip book={book} key={book.bookId}>

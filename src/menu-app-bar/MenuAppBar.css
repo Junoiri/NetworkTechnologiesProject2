@@ -1,0 +1,30 @@
+.englishButton {
+  position: fixed;
+  left: 50px;
+  top: 90px;
+  background: transparent;
+  border: none;
+  width: 60px;
+  height: 60px;
+}
+
+.englishButton img {
+  width: 10%;
+  height: 10%;
+  object-fit: contain;
+}
+.polishButton {
+  position: fixed;
+  left: 50px;
+  top: 90px;
+  background: transparent;
+  border: none;
+  width: 60px;
+  height: 60px;
+}
+
+.polishButton img {
+  width: 10%;
+  height: 10%;
+  object-fit: contain;
+}

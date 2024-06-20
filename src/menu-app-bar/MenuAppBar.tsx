@@ -11,6 +11,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useApi } from '../api/ApiProvider';
+import { useTranslation } from 'react-i18next';
+import icPlS from '../assets/ic_pl_s.png';
+import icEnS from '../assets/ic_en_s.png';
+import LanguageIcon from '@mui/icons-material/Language';
+import './MenuAppBar.css';
 
 const styles = {
   root: {
@@ -30,6 +37,22 @@ const styles = {
 export default function MenuAppBar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isStaff, setIsStaff] = useState(false);
+
+  const apiClient = useApi();
+
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    apiClient.getUserId().then((response) => {
+      if (response.success && response.data) {
+        const userId = Number(response.data);
+        if (!isNaN(userId)) {
+          apiClient.isUserStaff(userId).then(setIsStaff);
+        }
+      }
+    });
+  }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorEl(event.currentTarget);
@@ -50,7 +73,7 @@ export default function MenuAppBar() {
           size="large"
           edge="start"
           color="inherit"
-          aria-label="menu"
+          aria-label={t('menu')}
           sx={{
             mr: 2,
             ...styles.menuAndProfileIcons,
@@ -69,20 +92,28 @@ export default function MenuAppBar() {
             sx={styles.menuItem}
             onClick={() => handleNavigate('/home')}
           >
-            Home Page
+            {t('homePage')}
           </MenuItem>
           <MenuItem
             sx={styles.menuItem}
             onClick={() => handleNavigate('/books')}
           >
-            Book List
+            {t('bookList')}
           </MenuItem>
           <MenuItem
             sx={styles.menuItem}
             onClick={() => handleNavigate('/loans')}
           >
-            Loans List
+            {t('loansList')}
           </MenuItem>
+          {isStaff && (
+            <MenuItem
+              sx={styles.menuItem}
+              onClick={() => handleNavigate('/users')}
+            >
+              {t('users')}
+            </MenuItem>
+          )}
         </Menu>
         <Typography
           variant="h6"
@@ -92,14 +123,32 @@ export default function MenuAppBar() {
             ...styles.appBarText,
           }}
         >
-          Library Webapp
+          {t('libraryWebapp')}
         </Typography>
         <Box>
           <IconButton
             size="large"
             edge="end"
             color="inherit"
-            aria-label="account of current user"
+            aria-label={t('englishLanguage')}
+            onClick={() => i18n.changeLanguage('en')}
+          >
+            <img src={icEnS} alt="English" />
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label={t('polishLanguage')}
+            onClick={() => i18n.changeLanguage('pl')}
+          >
+            <img src={icPlS} alt="Polish" />
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label={t('accountOfCurrentUser')}
             aria-controls="menu-appbar"
             aria-haspopup="true"
             onClick={() => navigate('/login')}

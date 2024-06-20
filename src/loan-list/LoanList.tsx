@@ -14,14 +14,20 @@ import LoanDetailsTooltip from '../loan-details-tooltip/LoanDetailsTooltip';
 import MenuAppBar from '../menu-app-bar/MenuAppBar';
 import { LoanDto } from '../api/dto/loan.dto';
 import { useApi } from '../api/ApiProvider';
+import addIcon from '../assets/ic-add.png';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function LoanList() {
   const [loans, setLoans] = useState<LoanDto[]>([]);
   const apiClient = useApi();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const fetchLoans = async () => {
     try {
-      const response = await apiClient.getAllLoans();
+      await apiClient.getUserId();
+      const response = await apiClient.getLoansForReader();
       if (response.data) {
         setLoans(response.data);
       } else {
@@ -40,12 +46,18 @@ function LoanList() {
     <Grid container direction="column">
       <Grid item>
         <MenuAppBar />
+        <button
+          className="add-loan-button"
+          onClick={() => navigate('/loanform')}
+        >
+          <img src={addIcon} alt={t('Add loan')} />
+        </button>
       </Grid>
       <Grid item>
         <Box className="loan-list-container">
           <List dense className="loan-list">
             <Typography variant="h5" component="h1" className="loan-list-title">
-              Loan List
+              {t('Loan List')}
             </Typography>
             {loans.map((loan) => (
               <LoanDetailsTooltip loan={loan} key={loan.loanId}>
@@ -54,8 +66,8 @@ function LoanList() {
                     <LibraryBooksIcon className="loan-icon" />
                   </ListItemIcon>
                   <ListItemText
-                    primary={`Loan ID: ${loan.loanId}`}
-                    secondary={`Book ID: ${loan.bookId}, User ID: ${loan.userId}`}
+                    primary={`${t('Loan ID')}: ${loan.loanId}`}
+                    secondary={`${t('Book ID')}: ${loan.bookId}, ${t('User ID')}: ${loan.userId}`}
                   />
                 </ListItem>
               </LoanDetailsTooltip>

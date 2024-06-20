@@ -1,0 +1,36 @@
+.user-details-tooltip {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.user-details-tooltip .accordion-summary {
+  font-weight: bold;
+}
+
+.user-details-tooltip .accordion-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-details-tooltip .accordion-details .button {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.user-details-tooltip .accordion-details .button:hover {
+  background: linear-gradient(to right, #764ba2, #667eea);
+  color: white;
+}

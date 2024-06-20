@@ -1,8 +1,8 @@
-export type LoanDto = {
-  loanId: number;
+export interface LoanDto {
+  loanId?: number;
   bookId: number;
-  userId: number;
+  userId?: number;
   loanDate: string;
   dueDate: string;
   returnDate: string;
-};
+}

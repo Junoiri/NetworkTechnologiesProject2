@@ -10,13 +10,15 @@ import React, { useState } from 'react';
 import MenuAppBar from '../menu-app-bar/MenuAppBar';
 import { useNavigate } from 'react-router-dom';
 import './BookForm.css';
-import { LibraryClient } from '../api/library-client';
 import { useApi } from '../api/ApiProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const BookForm = () => {
+  const { t } = useTranslation();
+
   const [isbn, setIsbn] = useState<string | undefined>('');
   const [title, setTitle] = useState<string | undefined>('');
   const [author, setAuthor] = useState<string | undefined>('');
@@ -24,8 +26,8 @@ const BookForm = () => {
   const [year, setYear] = useState<number | undefined>();
   const [availableCopies, setAvailableCopies] = useState<number | undefined>();
 
-  const navigate = useNavigate();
   const libraryClient = useApi();
+  const navigate = useNavigate();
   const backIcon = require('../assets/ic-back.png');
 
   const handleSave = async () => {
@@ -52,6 +54,7 @@ const BookForm = () => {
       }
     }
   };
+
   return (
     <>
       <MenuAppBar />
@@ -59,11 +62,11 @@ const BookForm = () => {
       <IconButton
         edge="start"
         color="inherit"
-        aria-label="back"
+        aria-label={t('back')}
         onClick={() => navigate('/books')}
         className="back-button"
       >
-        <img src={backIcon} alt="Back" />
+        <img src={backIcon} alt={t('Back')} />
       </IconButton>
       <Container style={{ marginTop: '100px', padding: '0 50px' }}>
         <Grid container spacing={4} direction="row" justifyContent="center">
@@ -76,21 +79,21 @@ const BookForm = () => {
               height="100%"
             >
               <TextField
-                label="ISBN"
+                label={t('ISBN')}
                 value={isbn}
                 onChange={(e) => setIsbn(e.target.value)}
                 fullWidth
                 style={{ marginBottom: '20px' }}
               />
               <TextField
-                label="Title"
+                label={t('Title')}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 fullWidth
                 style={{ marginBottom: '20px' }}
               />
               <TextField
-                label="Author"
+                label={t('Author')}
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
                 fullWidth
@@ -107,21 +110,21 @@ const BookForm = () => {
               height="100%"
             >
               <TextField
-                label="Publisher"
+                label={t('Publisher')}
                 value={publisher}
                 onChange={(e) => setPublisher(e.target.value)}
                 fullWidth
                 style={{ marginBottom: '20px' }}
               />
               <TextField
-                label="Year"
+                label={t('Year')}
                 value={year}
                 onChange={(e) => setYear(Number(e.target.value))}
                 fullWidth
                 style={{ marginBottom: '20px' }}
               />
               <TextField
-                label="Available Copies"
+                label={t('Available Copies')}
                 value={availableCopies}
                 onChange={(e) => setAvailableCopies(Number(e.target.value))}
                 fullWidth
@@ -136,7 +139,7 @@ const BookForm = () => {
           style={{ marginTop: '20px' }}
         >
           <Button onClick={handleSave} style={{ width: '50%' }}>
-            Save
+            {t('Save')}
           </Button>
         </Box>
       </Container>

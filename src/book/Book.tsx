@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import './Book.css';
+import { useTranslation } from 'react-i18next';
 
 interface BookProps {
   title: string;
@@ -8,6 +9,8 @@ interface BookProps {
 }
 
 function Book({ title, author }: BookProps) {
+  const { t } = useTranslation();
+
   return (
     <Card className="book-card" variant="outlined">
       <CardContent>
@@ -15,7 +18,7 @@ function Book({ title, author }: BookProps) {
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          by {author}
+          {`${t('by')} ${author}`}
         </Typography>
       </CardContent>
     </Card>

@@ -1,0 +1,64 @@
+.user-borrowed-books-container {
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+  width: 100%; /* Take up half of the available width */
+  float: right; /* Align to the right side of the screen */
+}
+
+.user-borrowed-books-title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.borrowed-books-search-box {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  margin: 10px 0;
+}
+
+.borrowed-books-input-search {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.borrowed-books-btn-search {
+  padding: 10px;
+}
+.loans-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.loan-item {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+  transition: background 0.3s ease-in-out; /* Smooth transition */
+}
+
+.loan-item:hover {
+  background: #ddd; /* Light grey background on hover */
+}
+.return-button {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.return-button:hover {
+  background: linear-gradient(to right, #764ba2, #667eea);
+  color: white;
+}
